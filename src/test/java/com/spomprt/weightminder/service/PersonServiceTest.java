@@ -1,12 +1,10 @@
 package com.spomprt.weightminder.service;
 
 import com.spomprt.weightminder.AbstractSpringBootTest;
+import com.spomprt.weightminder.domain.Person;
 import com.spomprt.weightminder.domain.Record;
-import com.spomprt.weightminder.repository.RecordRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -16,9 +14,6 @@ class PersonServiceTest extends AbstractSpringBootTest {
 
     @Autowired
     private PersonService personService;
-
-    @Autowired
-    private RecordRepository recordRepository;
 
     @Test
     void registerNewPerson() {
@@ -43,11 +38,32 @@ class PersonServiceTest extends AbstractSpringBootTest {
         personService.addRecord(username, weight);
 
         //assert
-        Optional<Record> latestRecord = recordRepository.findLatestRecord(username);
-        assertTrue(latestRecord.isPresent());
-        assertThat(latestRecord.get())
+        Person person = personService.get(username);
+        assertTrue(person.getActualRecord().isPresent());
+        assertThat(person.getActualRecord().get())
                 .extracting(Record::currentWeight)
                 .isEqualTo(weight);
+    }
+
+    @Test
+    void updateWeightToPerson() {
+        //arrange
+        String username = "spomprt";
+        personService.register(username);
+        Double weight = 100.0;
+        Double newWeight = 101.0;
+
+        //act
+        personService.addRecord(username, weight);
+        personService.addRecord(username, newWeight);
+
+        //assert
+        Person person = personService.get(username);
+        assertThat(person.getRecordsForLastTenDays())
+                .hasSize(1)
+                .first()
+                .extracting(Record::currentWeight)
+                .isEqualTo(newWeight);
     }
 
 }

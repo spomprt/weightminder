@@ -2,26 +2,38 @@ package com.spomprt.weightminder.service;
 
 import com.spomprt.weightminder.domain.Person;
 import com.spomprt.weightminder.repository.PersonRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PersonService {
 
+    @PersistenceContext
+    private final EntityManager entityManager;
     private final PersonRepository personRepository;
 
     @Transactional
     public void register(String username) {
-        Person person = Person.newPerson(username);
+        Optional<Person> personMaybe = personRepository.findById(username);
 
-        personRepository.save(person);
+        if (personMaybe.isPresent()) {
+            log.info("Person with username {} already exist.", username);
+        } else {
+            Person person = Person.newPerson(username);
 
-        log.info("{} is registered.", person);
+            entityManager.persist(person);
+
+            log.info("{} is registered.", person);
+        }
     }
 
     @Transactional
@@ -34,7 +46,7 @@ public class PersonService {
     }
 
     public Person get(String username) {
-        return personRepository.findById(username)
+        return personRepository.findPerson(username)
                 .orElseThrow(EntityNotFoundException::new);
     }
 

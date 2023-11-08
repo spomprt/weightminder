@@ -3,6 +3,7 @@ package com.spomprt.weightminder;
 import com.spomprt.weightminder.repository.PersonRepository;
 import com.spomprt.weightminder.repository.RecordRepository;
 import com.spomprt.weightminder.service.PersonService;
+import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +62,10 @@ public class AbstractSpringBootTest {
 
         @Bean
         public PersonService personService(
-                PersonRepository personRepository
+                PersonRepository personRepository,
+                EntityManager entityManager
         ) {
-            return new PersonService(personRepository);
+            return new PersonService(entityManager, personRepository);
         }
 
     }

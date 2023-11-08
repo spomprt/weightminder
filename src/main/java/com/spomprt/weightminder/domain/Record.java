@@ -2,6 +2,7 @@ package com.spomprt.weightminder.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.compare.ComparableUtils;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -38,6 +39,20 @@ public class Record {
         record.setWeight(weight);
         record.setCreatedAt(LocalDate.now());
         return record;
+    }
+
+    //todo написать тест кейсы
+    public boolean isIncludedToLastDays(int days) {
+        LocalDate lastTenDays = LocalDate.now().minusDays(days - 1);
+        return ComparableUtils.is(this.createdAt).greaterThanOrEqualTo(lastTenDays);
+    }
+
+    public boolean isActual() {
+        return this.createdAt.isEqual(LocalDate.now());
+    }
+
+    public void updateWeight(Double newWeight) {
+        this.weight = newWeight;
     }
 
     public Double currentWeight() {
