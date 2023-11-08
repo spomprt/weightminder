@@ -1,29 +1,41 @@
 package com.spomprt.weightminder.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
-@ToString(
-        of = {"username"}
-)
+import java.util.HashSet;
+import java.util.Set;
+
+@ToString(onlyExplicitlyIncluded = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter(AccessLevel.PRIVATE)
+@Getter(AccessLevel.PRIVATE)
 @Entity
 @Table(name = "persons")
 public class Person {
 
+    @ToString.Include
     @Id
     private String username;
 
-    private Double weight;
-
-    protected Person() {
-    }
+    @ToString.Exclude
+    @OneToMany(
+            mappedBy = "owner",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
+    )
+    private Set<Record> records = new HashSet<>();
 
     public static Person newPerson(String username) {
         Person person = new Person();
-        person.username = username;
+        person.setUsername(username);
         return person;
+    }
+
+    public void addRecord(Double weight) {
+        Record record = Record.newRecord(this, weight);
+        records.add(record);
     }
 
 }
