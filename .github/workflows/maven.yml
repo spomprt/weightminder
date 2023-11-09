@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipTests
+      run: mvn -B package --file pom.xml -DskipTests && ls target
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.io/spomprt1/weightminder:$(date +%s)
