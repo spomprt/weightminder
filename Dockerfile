@@ -1,8 +1,6 @@
-FROM maven:3.8.3-openjdk-17
-
-WORKDIR /app
-
-COPY target/*.jar app.jar
-
-EXPOSE 8080
-ENTRYPOINT ["java","-Xmx2g","-jar","/app/app.jar"]
+FROM openjdk:17-alpine
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
