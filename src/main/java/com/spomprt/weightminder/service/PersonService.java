@@ -10,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -22,11 +24,11 @@ public class PersonService {
     private final PersonRepository personRepository;
 
     @Transactional
-    public void register(String username) {
+    public void register(String username, Long chatId) {
         Optional<Person> personMaybe = personRepository.findById(username);
 
         if (personMaybe.isEmpty()) {
-            Person person = Person.newPerson(username);
+            Person person = Person.newPerson(username, chatId);
 
             entityManager.persist(person);
 
@@ -42,6 +44,11 @@ public class PersonService {
 
         log.info("Record with weight {} to {} added", weight, person);
     }
+
+    public Stream<Person> getAll() {
+        return personRepository.findPersons();
+    }
+
 
     public Person get(String username) {
         return personRepository.findPerson(username)

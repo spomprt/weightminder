@@ -1,6 +1,7 @@
 create table if not exists persons
 (
-    username varchar primary key
+    username varchar primary key,
+    chat_id  bigint not null
 );
 
 create table if not exists records

@@ -88,7 +88,7 @@ public class WeightMinderBot extends TelegramLongPollingBot {
                     }
                 }
             } else {
-                personService.register(username);
+                personService.register(username, message.getChatId());
 
                 personService.addRecord(username, Double.valueOf(text));
             }

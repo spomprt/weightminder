@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, String> {
@@ -16,5 +17,10 @@ public interface PersonRepository extends JpaRepository<Person, String> {
             where p.username = :username
             """)
     Optional<Person> findPerson(@Param("username") String username);
+
+    @Query("""
+            select p from Person p
+            """)
+    Stream<Person> findPersons();
 
 }

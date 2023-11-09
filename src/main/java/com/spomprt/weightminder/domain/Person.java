@@ -21,6 +21,9 @@ public class Person {
     @Id
     private String username;
 
+    @Column(name = "chat_id")
+    private Long chatId;
+
     @ToString.Exclude
     @OneToMany(
             mappedBy = "owner",
@@ -33,9 +36,10 @@ public class Person {
     )
     private List<Record> records = new ArrayList<>();
 
-    public static Person newPerson(String username) {
+    public static Person newPerson(String username, Long chatId) {
         Person person = new Person();
         person.setUsername(username);
+        person.setChatId(chatId);
         return person;
     }
 
@@ -73,6 +77,10 @@ public class Person {
         Record record = this.records.get(records.size() - 1);
 
         return record.getPrettyRecord();
+    }
+
+    public Long getChat() {
+        return this.chatId;
     }
 
 }

@@ -19,9 +19,10 @@ class PersonServiceTest extends AbstractSpringBootTest {
     void registerNewPerson() {
         //arrange
         String username = "spomprt";
+        Long chatId = 1L;
 
         //act
-        personService.register(username);
+        personService.register(username, chatId);
 
         //assert
         assertDoesNotThrow(() -> personService.get(username));
@@ -31,7 +32,8 @@ class PersonServiceTest extends AbstractSpringBootTest {
     void addWeightToPerson() {
         //arrange
         String username = "spomprt";
-        personService.register(username);
+        Long chatId = 1L;
+        personService.register(username, chatId);
         Double weight = 100.0;
 
         //act
@@ -49,7 +51,8 @@ class PersonServiceTest extends AbstractSpringBootTest {
     void updateWeightToPerson() {
         //arrange
         String username = "spomprt";
-        personService.register(username);
+        Long chatId = 1L;
+        personService.register(username, chatId);
         Double weight = 100.0;
         Double newWeight = 101.0;
 
