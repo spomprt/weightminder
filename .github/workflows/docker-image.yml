@@ -19,8 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - run: mvn clean package -DskipTests=true
-    - run: mkdir app && cp target/*.jar app/
-    - run: ls /app
+    - run: mkdir app && cp target/*.jar app && ls app
     - uses: actions/upload-artifact@v3
       with:
         name: Package
