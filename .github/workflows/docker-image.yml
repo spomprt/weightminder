@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'liberica'
-
-      - run: mvn clean package -DskipTests=true
+        run: mvn clean package -DskipTests=true
 
       - run: echo "WEIGHT_MINDER_APP_VERSION=$(date +%s)" >> $GITHUB_ENV
 
