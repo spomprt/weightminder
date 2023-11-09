@@ -41,7 +41,6 @@ public class Record {
         return record;
     }
 
-    //todo написать тест кейсы
     public boolean isIncludedToLastDays(int days) {
         LocalDate lastTenDays = LocalDate.now().minusDays(days - 1);
         return ComparableUtils.is(this.createdAt).greaterThanOrEqualTo(lastTenDays);

@@ -1,3 +1,7 @@
+telegram:
+  bot:
+    token: 6870085716:AAHY-TrZn4fB5fHDD_seTF39dpk9pfZQ8zE
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/weightminder

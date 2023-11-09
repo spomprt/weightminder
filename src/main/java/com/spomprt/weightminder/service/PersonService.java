@@ -25,9 +25,7 @@ public class PersonService {
     public void register(String username) {
         Optional<Person> personMaybe = personRepository.findById(username);
 
-        if (personMaybe.isPresent()) {
-            log.info("Person with username {} already exist.", username);
-        } else {
+        if (personMaybe.isEmpty()) {
             Person person = Person.newPerson(username);
 
             entityManager.persist(person);

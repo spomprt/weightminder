@@ -50,8 +50,6 @@ public class Person {
         }
     }
 
-    //todo добавить методы первый вес и последний вес
-
     public Set<Record> getRecordsForLastTenDays() {
         return this.getRecords().stream()
                 .filter(r -> r.isIncludedToLastDays(10))
