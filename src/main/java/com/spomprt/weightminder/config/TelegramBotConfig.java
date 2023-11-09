@@ -35,7 +35,7 @@ public class TelegramBotConfig {
             telegramBotsApi.registerBot(weightMinderBot);
             return telegramBotsApi;
         } catch (TelegramApiException e) {
-            log.error("{}", e.getMessage());
+            log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }

@@ -1,13 +1,15 @@
 package com.spomprt.weightminder.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.compare.ComparableUtils;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter(AccessLevel.PRIVATE)
 @Getter(AccessLevel.PRIVATE)
@@ -15,20 +17,16 @@ import java.util.UUID;
 @Table(name = "records")
 public class Record {
 
-    @EqualsAndHashCode.Include
     @Id
     private UUID id;
 
-    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner")
     private Person owner;
 
-    @EqualsAndHashCode.Exclude
     @Column(name = "weight")
     private Double weight;
 
-    @EqualsAndHashCode.Exclude
     @Column(name = "created_at")
     private LocalDate createdAt;
 
@@ -56,6 +54,18 @@ public class Record {
 
     public Double currentWeight() {
         return this.weight;
+    }
+
+    public LocalDate whenAdded() {
+        return this.createdAt;
+    }
+
+    public String getPrettyRecord() {
+        String date = "Дата записи: " + this.whenAdded();
+
+        String weight = "Вес: " + this.currentWeight();
+
+        return date + ". " + weight;
     }
 
 }

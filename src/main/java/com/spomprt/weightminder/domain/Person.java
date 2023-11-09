@@ -3,7 +3,8 @@ package com.spomprt.weightminder.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class Person {
             },
             orphanRemoval = true
     )
-    private Set<Record> records = new HashSet<>();
+    private List<Record> records = new ArrayList<>();
 
     public static Person newPerson(String username) {
         Person person = new Person();
@@ -60,6 +61,18 @@ public class Person {
         return this.records.stream()
                 .filter(Record::isActual)
                 .findFirst();
+    }
+
+    public String getInitial() {
+        Record record = this.records.get(0);
+
+        return record.getPrettyRecord();
+    }
+
+    public String getCurrent() {
+        Record record = this.records.get(records.size() - 1);
+
+        return record.getPrettyRecord();
     }
 
 }
