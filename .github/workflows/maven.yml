@@ -35,4 +35,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.repository }}:${{ steps.vars.outputs.tag }}
+          tags: docker.io/spomprt1/weightminder:${{ steps.vars.outputs.tag }}
