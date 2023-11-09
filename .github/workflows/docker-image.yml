@@ -28,3 +28,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag spomprt1/weightminder:$(date +%s)
+      
+    - run: docker push docker.io/spomprt1/weightminder
