@@ -20,6 +20,7 @@ jobs:
         distribution: 'temurin'
     - run: mvn clean package -DskipTests=true
     - run: mkdir app && cp target/*.jar app/
+    - run: ls /app
     - uses: actions/upload-artifact@v3
       with:
         name: Package
