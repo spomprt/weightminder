@@ -55,7 +55,7 @@ public class WeightMinderBot extends TelegramLongPollingBot {
 
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(message.getChatId());
-                    sendMessage.setText("Выберите команду");
+                    sendMessage.setText("Список доступных команд:");
                     sendMessage.setReplyMarkup(markup);
 
                     try {
