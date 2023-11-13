@@ -1,0 +1,29 @@
+services:
+
+  postgres:
+    image: 'postgres:15.0'
+    environment:
+      - 'POSTGRES_DB=weightminder'
+      - 'POSTGRES_PASSWORD=spomprt'
+      - 'POSTGRES_USER=spomprt'
+    volumes:
+      - ./postgres/weightminder:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:7.2.3-alpine
+    ports:
+      - '6379:6379'
+
+  weightminder:
+    image: 'docker.io/spomprt1/weightminder:latest'
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/weightminder'
+      - 'SPRING_DATASOURCE_USERNAME=spomprt'
+      - 'SPRING_DATASOURCE_PASSWORD=spomprt'
+      - 'CACHE_REDIS_HOST=redis'
+      - 'CACHE_REDIS_PORT=6379'
+    depends_on:
+      - postgres
+      - redis

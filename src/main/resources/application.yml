@@ -1,0 +1,27 @@
+telegram:
+  bot:
+    token: override
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/weightminder
+    username: spomprt
+    password: spomprt
+  cloud:
+    openfeign:
+      client:
+        config:
+          shortener-client:
+            default-request-headers:
+              x-rapidapi-key: override
+
+cache:
+  redis:
+    host: localhost
+    port: 6379
+
+external:
+  shortener:
+    url: https://url-shortener-service.p.rapidapi.com/shorten
+  quickchart:
+    url: https://quickchart.io/chart?c=
