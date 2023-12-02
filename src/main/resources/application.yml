@@ -22,6 +22,6 @@ cache:
 
 external:
   shortener:
-    url: https://url-shortener-service.p.rapidapi.com/shorten
+    url: https://spomprt.ru/blinkify/api/v1
   quickchart:
     url: https://quickchart.io/chart?c=

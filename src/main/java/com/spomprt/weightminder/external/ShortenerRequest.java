@@ -1,4 +1,8 @@
 package com.spomprt.weightminder.external;
 
-public record ShortenerRequest(String url) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record ShortenerRequest(
+        @JsonProperty("originalUrl") String originalUrl
+) {
 }

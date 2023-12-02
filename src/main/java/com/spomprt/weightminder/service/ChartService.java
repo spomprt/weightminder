@@ -25,6 +25,9 @@ public class ChartService {
     @Value("${external.quickchart.url}")
     private String quickChartApi;
 
+    @Value("${external.shortener.url}")
+    private String shortenerService;
+
     private final ObjectMapper objectMapper;
 
     private final ShortenerClient shortenerClient;
@@ -63,9 +66,9 @@ public class ChartService {
                 log.info("Try to get short url from external service");
                 ShortenerResult shortUrlResponse = shortenerClient.getShortLink(new ShortenerRequest(chartUrl));
 
-                String shortUrl = shortUrlResponse.resultUrl();
+                String shortUrl = shortUrlResponse.shortUrl();
 
-                urlShortenerLinksCache.put(userId, shortUrl);
+                urlShortenerLinksCache.put(userId, shortenerService + "/" + shortUrl);
 
                 return shortUrl;
             } catch (Exception e) {
