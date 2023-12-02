@@ -66,9 +66,9 @@ public class ChartService {
                 log.info("Try to get short url from external service");
                 ShortenerResult shortUrlResponse = shortenerClient.getShortLink(new ShortenerRequest(chartUrl));
 
-                String shortUrl = shortUrlResponse.shortUrl();
+                String shortUrl = shortenerService + "/" + shortUrlResponse.shortUrl();
 
-                urlShortenerLinksCache.put(userId, shortenerService + "/" + shortUrl);
+                urlShortenerLinksCache.put(userId, shortUrl);
 
                 return shortUrl;
             } catch (Exception e) {
