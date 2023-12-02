@@ -1,6 +1,6 @@
 telegram:
   bot:
-    token: override
+    token: 6870085716:AAHY-TrZn4fB5fHDD_seTF39dpk9pfZQ8zE
 
 spring:
   datasource:
@@ -13,7 +13,7 @@ spring:
         config:
           shortener-client:
             default-request-headers:
-              x-rapidapi-key: override
+              x-rapidapi-key: a9388f8939msh947f0fe994d4633p14e2e6jsnb35bb2c22af2
 
 cache:
   redis:
