@@ -25,3 +25,7 @@ external:
     url: https://spomprt.ru/blinkify/api/v1
   quickchart:
     url: https://quickchart.io/chart?c=
+
+javamelody:
+  enabled: true
+
