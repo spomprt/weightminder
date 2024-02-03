@@ -169,24 +169,24 @@ public class WeightMinderBot extends TelegramLongPollingBot {
         return "WeightMinder";
     }
 
-    @Async
-    @Scheduled(cron = "0 0 3 * * *")
-    @Transactional
-    public void remind() {
-        try (Stream<Person> persons = personService.getAll()) {
-            persons.forEach(
-                    p -> {
-                        SendMessage message = new SendMessage();
-                        message.setChatId(p.getChat());
-                        message.setText("Доброе утро. Не забудь встать на весы!");
-                        try {
-                            execute(message);
-                        } catch (TelegramApiException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-            );
-        }
-    }
+//    @Async
+//    @Scheduled(cron = "0 0 3 * * *")
+//    @Transactional
+//    public void remind() {
+//        try (Stream<Person> persons = personService.getAll()) {
+//            persons.forEach(
+//                    p -> {
+//                        SendMessage message = new SendMessage();
+//                        message.setChatId(p.getChat());
+//                        message.setText("Доброе утро. Не забудь встать на весы!");
+//                        try {
+//                            execute(message);
+//                        } catch (TelegramApiException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                    }
+//            );
+//        }
+//    }
 
 }
