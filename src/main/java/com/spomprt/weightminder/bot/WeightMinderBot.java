@@ -1,12 +1,8 @@
 package com.spomprt.weightminder.bot;
 
-import com.spomprt.weightminder.domain.Person;
 import com.spomprt.weightminder.service.ChartService;
 import com.spomprt.weightminder.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -18,9 +14,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
-import static com.spomprt.weightminder.bot.Commands.*;
+import static com.spomprt.weightminder.bot.Commands.CHART;
+import static com.spomprt.weightminder.bot.Commands.CURRENT;
+import static com.spomprt.weightminder.bot.Commands.HELP;
+import static com.spomprt.weightminder.bot.Commands.INITIAL;
+import static com.spomprt.weightminder.bot.Commands.LAST_10;
+import static com.spomprt.weightminder.bot.Commands.START;
 import static com.spomprt.weightminder.helper.MessageHelper.isCommand;
 
 @Slf4j
@@ -168,25 +168,5 @@ public class WeightMinderBot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return "WeightMinder";
     }
-
-//    @Async
-//    @Scheduled(cron = "0 0 3 * * *")
-//    @Transactional
-//    public void remind() {
-//        try (Stream<Person> persons = personService.getAll()) {
-//            persons.forEach(
-//                    p -> {
-//                        SendMessage message = new SendMessage();
-//                        message.setChatId(p.getChat());
-//                        message.setText("Доброе утро. Не забудь встать на весы!");
-//                        try {
-//                            execute(message);
-//                        } catch (TelegramApiException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                    }
-//            );
-//        }
-//    }
 
 }
