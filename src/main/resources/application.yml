@@ -17,8 +17,10 @@ spring:
 
 cache:
   redis:
-    host: localhost
-    port: 6379
+    host: ${CACHE_REDIS_HOST}
+    port: ${CACHE_REDIS_PORT}
+    user: ${CACHE_REDIS_USER}
+    password: ${CACHE_REDIS_PASSWORD}
 
 external:
   shortener:

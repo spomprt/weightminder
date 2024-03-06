@@ -16,12 +16,20 @@ public class RedisConfig {
     @Value("${cache.redis.port}")
     private int port;
 
+    @Value("${cache.redis.user}")
+    private String redisUser;
+
+    @Value("${cache.redis.password}")
+    private String redisPassword;
+
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(
                 host,
                 port
         );
+        redisStandaloneConfiguration.setUsername(redisUser);
+        redisStandaloneConfiguration.setPassword(redisPassword);
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
 
