@@ -24,7 +24,7 @@ cache:
 
 external:
   shortener:
-    url: https://spomprt.ru/blinkify/api/v1
+    url: https://blinkify.up.railway.app/blinkify/api/v1
   quickchart:
     url: https://quickchart.io/chart?c=
 
