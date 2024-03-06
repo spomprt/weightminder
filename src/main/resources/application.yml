@@ -4,9 +4,9 @@ telegram:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/weightminder
-    username: spomprt
-    password: spomprt
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   cloud:
     openfeign:
       client:
