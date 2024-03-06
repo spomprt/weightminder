@@ -1,6 +1,6 @@
 telegram:
   bot:
-    token: 6870085716:AAHY-TrZn4fB5fHDD_seTF39dpk9pfZQ8zE
+    token: 6870085716:AAFwjVWlDVgfr3NultplTQ68XWhbcxJ5inY
 
 spring:
   datasource:
