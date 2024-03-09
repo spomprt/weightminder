@@ -1,3 +1,6 @@
+server:
+  port: ${PORT}
+
 telegram:
   bot:
     token: 6870085716:AAHhR4sRy2OcxdWfrLf5mb2JzASjIRtPoXE
