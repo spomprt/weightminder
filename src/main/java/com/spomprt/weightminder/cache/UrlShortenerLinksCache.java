@@ -1,40 +1,43 @@
 package com.spomprt.weightminder.cache;
 
+import com.spomprt.weightminder.domain.Url;
+import com.spomprt.weightminder.repository.UrlRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
 public class UrlShortenerLinksCache {
 
-    private static final String KEY = "ShortUrl";
-    private final HashOperations<String, Object, Object> hashOperations;
+    private final UrlRepository urlRepository;
 
-    public UrlShortenerLinksCache(RedisTemplate<String, String> redisTemplate) {
-        this.hashOperations = redisTemplate.opsForHash();
+    public UrlShortenerLinksCache(UrlRepository urlRepository) {
+        this.urlRepository = urlRepository;
     }
 
     public void put(Long userId, String url) {
         log.debug("Put user's {} short url to cache", userId);
-        hashOperations.put(KEY, userId, url);
+        Url urlEntity = new Url();
+        urlEntity.setId(userId);
+        urlEntity.setUrl(url);
+        urlRepository.save(urlEntity);
     }
 
     public void delete(Long userId) {
         log.debug("Delete user's {} short url from cache", userId);
-        hashOperations.delete(KEY, userId);
+        urlRepository.deleteById(userId);
     }
 
     public String get(Long userId) {
-        Object cachedShortUrl = hashOperations.get(KEY, userId);
-
-        if (cachedShortUrl == null) {
+        Optional<Url> urlMaybe = urlRepository.findById(userId);
+        if (urlMaybe.isEmpty()) {
             log.debug("User's {} short url in cache not found", userId);
             return null;
         } else {
             log.debug("Retrieve user's {} short url from cache", userId);
-            return (String) cachedShortUrl;
+            return urlMaybe.get().getUrl();
         }
     }
 
