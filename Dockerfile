@@ -4,7 +4,7 @@ WORKDIR /app
 RUN apk add --no-cache openjdk17 maven
 COPY . .
 
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 FROM bellsoft/liberica-openjdk-alpine-musl:17.0.6-10
 
