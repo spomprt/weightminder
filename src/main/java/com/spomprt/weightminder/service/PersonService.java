@@ -33,7 +33,7 @@ public class PersonService {
 
             entityManager.persist(person);
 
-            log.info("{} is registered.", person);
+            log.debug("{} is registered.", person);
         }
     }
 
@@ -47,7 +47,7 @@ public class PersonService {
             urlShortenerLinksCache.delete(userId);
         }
 
-        log.info("Record with weight {} to {} added", weight, person);
+        log.debug("Record with weight {} to {} added", weight, person);
     }
 
     public Stream<Person> getAll() {

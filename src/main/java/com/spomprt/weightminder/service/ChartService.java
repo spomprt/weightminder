@@ -63,7 +63,7 @@ public class ChartService {
             String chartUrl = quickChartApi + encodedChart;
 
             try {
-                log.info("Try to get short url from external service");
+                log.debug("Try to get short url from external service");
                 ShortenerResult shortUrlResponse = shortenerClient.getShortLink(new ShortenerRequest(chartUrl));
 
                 String shortUrl = shortenerService + "/" + shortUrlResponse.shortUrl();

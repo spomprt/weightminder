@@ -17,12 +17,12 @@ public class UrlShortenerLinksCache {
     }
 
     public void put(Long userId, String url) {
-        log.info("Put user's {} short url to cache", userId);
+        log.debug("Put user's {} short url to cache", userId);
         hashOperations.put(KEY, userId, url);
     }
 
     public void delete(Long userId) {
-        log.info("Delete user's {} short url from cache", userId);
+        log.debug("Delete user's {} short url from cache", userId);
         hashOperations.delete(KEY, userId);
     }
 
@@ -30,10 +30,10 @@ public class UrlShortenerLinksCache {
         Object cachedShortUrl = hashOperations.get(KEY, userId);
 
         if (cachedShortUrl == null) {
-            log.info("User's {} short url in cache not found", userId);
+            log.debug("User's {} short url in cache not found", userId);
             return null;
         } else {
-            log.info("Retrieve user's {} short url from cache", userId);
+            log.debug("Retrieve user's {} short url from cache", userId);
             return (String) cachedShortUrl;
         }
     }
