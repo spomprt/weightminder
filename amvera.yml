@@ -1,3 +1,4 @@
+---
 meta:
   environment: jvm
   toolchain:
@@ -6,8 +7,8 @@ meta:
 build:
   artifacts:
     target/*.jar: /
-  args: 'spring-boot:repackage '
+  args: 'spring-boot:repackage -DskipTests'
 run:
-  jarName: /
+  jarName: weightminder-0.1.1.jar
   persistenceMount: /data
-  containerPort: 80
+  containerPort: 8080
