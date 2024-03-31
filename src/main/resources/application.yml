@@ -3,7 +3,7 @@ server:
 
 telegram:
   bot:
-    token: 6870085716:AAHhR4sRy2OcxdWfrLf5mb2JzASjIRtPoXE
+    token: 6870085716:AAH0SbM-KZSR4yb-rozhb4-2rlsI9Kb451s
 
 spring:
   datasource:
