@@ -17,6 +17,8 @@ spring:
           shortener-client:
             default-request-headers:
               x-rapidapi-key: a9388f8939msh947f0fe994d4633p14e2e6jsnb35bb2c22af2
+  jpa:
+    open-in-view: false
 
 cache:
   redis:
