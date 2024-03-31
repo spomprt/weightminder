@@ -1,16 +1,14 @@
-FROM bellsoft/liberica-openjdk-alpine-musl:17.0.6-10 AS build
-
+#образ maven для сборки проекта
+FROM maven:3.9.4 as build
+#собираем проект в рабочую директорию
 WORKDIR /app
-RUN apk add --no-cache openjdk17 maven
-COPY . .
+COPY pom.xml /app
+RUN mvn dependency:resolve
+COPY . /app
+RUN mvn clean
+RUN mvn package
 
-RUN mvn clean package -DskipTests
-
+#образ jdk11 для запуска собранного jar файла
 FROM bellsoft/liberica-openjdk-alpine-musl:17.0.6-10
-
-WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-
-EXPOSE 8080
-
-ENTRYPOINT ["java","-Xmx64m","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
