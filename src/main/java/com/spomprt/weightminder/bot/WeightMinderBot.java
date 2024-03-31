@@ -40,6 +40,7 @@ public class WeightMinderBot extends TelegramLongPollingBot {
     //todo причесать код
     @Override
     public void onUpdateReceived(Update update) {
+        log.info("Receive message: {}", update.getMessage().getText());
         Message message = update.getMessage();
         if (message != null) {
             Long userId = message.getFrom().getId();
