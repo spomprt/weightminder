@@ -22,6 +22,7 @@ spring:
 
 cache:
   redis:
+    debug: ${REDIS_ARGS}
     host: ${REDIS_HOST}
     port: ${REDIS_PORT}
     user: ${REDIS_USER}
