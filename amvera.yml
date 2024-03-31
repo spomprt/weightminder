@@ -7,7 +7,7 @@ meta:
 build:
   artifacts:
     target/*.jar: /
-  args: 'spring-boot:repackage -DskipTests'
+  args: spring-boot:repackage -DskipTests
 run:
   jarName: weightminder-0.1.1.jar
   persistenceMount: /data
