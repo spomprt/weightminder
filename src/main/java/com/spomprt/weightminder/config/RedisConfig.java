@@ -24,9 +24,6 @@ public class RedisConfig {
     @Value("${cache.redis.password}")
     private String redisPassword;
 
-    @Value("${cache.redis.debug}")
-    private String debug;
-
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(
@@ -35,11 +32,6 @@ public class RedisConfig {
         );
         redisStandaloneConfiguration.setUsername(redisUser);
         redisStandaloneConfiguration.setPassword(redisPassword);
-        log.info("Host: {}", host);
-        log.info("Port: {}", port);
-        log.info("User: {}", redisUser);
-        log.info("Password: {}", redisPassword);
-        log.info("REDIS_ARGS: {}", debug);
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
 
