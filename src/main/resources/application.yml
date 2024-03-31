@@ -7,9 +7,9 @@ telegram:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_DOMAIN_NAME}:5432/${DB_NAME}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://amvera-spomprt-cnpg-db-weightminder-rw:5432/weightminder
+    username: spomprt
+    password: spomprt
   cloud:
     openfeign:
       client:
