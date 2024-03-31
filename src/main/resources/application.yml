@@ -7,9 +7,9 @@ telegram:
 
 spring:
   datasource:
-    url: jdbc:postgresql://amvera-spomprt-cnpg-db-weightminder-rw:5432/weightminder
-    username: spomprt
-    password: spomprt
+    url: jdbc:postgresql://${PG_DOMAIN_NAME}:${PG_PORT}/${PG_DB_NAME}
+    username: ${PG_USERNAME}
+    password: ${PG_PASSWORD}
   cloud:
     openfeign:
       client:
@@ -20,10 +20,10 @@ spring:
 
 cache:
   redis:
-    host: ${CACHE_REDIS_HOST}
-    port: ${CACHE_REDIS_PORT}
-    user: ${CACHE_REDIS_USER}
-    password: ${CACHE_REDIS_PASSWORD}
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    user: ${REDIS_USER}
+    password: ${REDIS_PASSWORD}
 
 external:
   shortener:
